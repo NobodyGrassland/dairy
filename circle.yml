@@ -1,0 +1,13 @@
+machine:
+
+  timezone:
+    America/Los_Angeles # Set the timezone to 1
+
+  # Add some environment variables
+  environment:
+    CIRCLE_ENV: test
+
+notify:
+  webhooks:
+    # A list of hashes representing hooks. Only the url field is supported.
+    - url: https://webhook.atomist.com/atomist/circle
