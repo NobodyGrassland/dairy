@@ -2,5 +2,5 @@ notify:
 
   webhooks:
     # A list boom
-    - url: https://webhook.atomist.com/atomist/circle
+    - url: https://somedomain.com
 
