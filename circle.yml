@@ -6,7 +6,7 @@ environment:
 
 checkout:
   post:
-  - bash -c "${NOTIFY_ATOMIST_BUILD_STARTED}"
+  - ${NOTIFY_ATOMIST_BUILD_STARTED}
 notify:
   webhooks:
   - url: 'https://webhook.atomist.com/atomist/circle'
