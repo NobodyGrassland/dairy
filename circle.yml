@@ -1,9 +1,12 @@
 machine:
   timezone:
     America/Los_Angeles
+environment:
+  NOTIFY_ATOMIST_BUILD_STARTED: curl -H 'Content-Type: application/json' -d "{\"payload\": {\"lifecycle\": \"started\", \"build_num\": \"${CIRCLE_BUILD_NUM}\", \"vcs_revision\": \"${CIRCLE_SHA1}\", \"branch\": \"${CIRCLE_BRANCH}\", \"reponame\": \"${CIRCLE_PROJECT_REPONAME}\", \"username\": \"${CIRCLE_PROJECT_USERNAME}\"}}" https://webhook.atomist.com/atomist/circle
+
 checkout:
   post:
-  - echo "{\"payload\": {\"lifecycle\": \"started\", \"build_num\": \"${CIRCLE_BUILD_NUM}\", \"vcs_revision\": \"${CIRCLE_SHA1}\", \"branch\": \"${CIRCLE_BRANCH}\", \"reponame\": \"${CIRCLE_PROJECT_REPONAME}\", \"username\": \"${CIRCLE_PROJECT_USERNAME}\"}}"
+  - bash -c "${NOTIFY_ATOMIST_BUILD_STARTED}"
 notify:
   webhooks:
   - url: 'https://webhook.atomist.com/atomist/circle'
