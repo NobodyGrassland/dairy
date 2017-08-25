@@ -1,4 +1,4 @@
-notify:
-  webhooks:
-  - url: 'https://somedomain.com'
-  - url: 'https://webhook.atomist.com/atomist/circle'
+machine:
+  timezone:
+    America/Los_Angeles
+
