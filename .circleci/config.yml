@@ -6,6 +6,7 @@ jobs:
     working_directory: ~/repo
     environment:
       MAVEN_OPTS: '-Xmx3200m'
+      NOTIFY_ATOMIST_BUILD_STARTED: curl -H 'Content-Type: application/json' -d "{\"payload\": {\"lifecycle\": \"started\", \"build_num\": \"${CIRCLE_BUILD_NUM}\", \"vcs_revision\": \"${CIRCLE_SHA1}\", \"branch\": \"${CIRCLE_BRANCH}\", \"reponame\": \"${CIRCLE_PROJECT_REPONAME}\", \"username\": \"${CIRCLE_PROJECT_USERNAME}\"}}" https://webhook.atomist.com/atomist/circle
     steps:
       - checkout
       - restore_cache:
@@ -20,4 +21,4 @@ jobs:
       - run: mvn integration-test
 notify:
   webhooks:
-  - url: 'https://webhook.atomist.com/circle'
+  - url: 'https://webhook.atomist.com/atomist/circle'
