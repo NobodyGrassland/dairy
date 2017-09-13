@@ -10,7 +10,7 @@ jobs:
       - run: >-
           curl
           -H 'Content-Type: application/json'
-          -d '{"payload": {"lifecycle": "started", "build_num": "${CIRCLE_BUILD_NUM}", "vcs_revision": "${CIRCLE_SHA1}", "branch": "${CIRCLE_BRANCH}", "reponame": "${CIRCLE_PROJECT_REPONAME}", "username": "${CIRCLE_PROJECT_USERNAME}"}}'
+          -d '{"payload": {"lifecycle": "started", "build_num": "'${CIRCLE_BUILD_NUM}'", "vcs_revision": "${CIRCLE_SHA1}", "branch": "${CIRCLE_BRANCH}", "reponame": "${CIRCLE_PROJECT_REPONAME}", "username": "${CIRCLE_PROJECT_USERNAME}"}}'
           "https://httpbin.org/post"
       - checkout
       - restore_cache:
