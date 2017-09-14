@@ -7,22 +7,24 @@ jobs:
     environment:
       MAVEN_OPTS: '-Xmx3200m'
     steps:
-      - run: >-
-          curl
-          -H 'Content-Type: application/json'
-          -d '{"payload": {"lifecycle": "started", "build_num": "'${CIRCLE_BUILD_NUM}'", "vcs_revision": "'${CIRCLE_SHA1}'", "branch": "'${CIRCLE_BRANCH}'", "reponame": "'${CIRCLE_PROJECT_REPONAME}'", "username": "'${CIRCLE_PROJECT_USERNAME}'"}}'
-          "https://webhook.atomist.com/circle"
-      - checkout
-      - restore_cache:
+    - run: >-
+          curl -H 'Content-Type: application/json' -d '{"payload": {"lifecycle":
+          "started", "build_num": "'${CIRCLE_BUILD_NUM}'", "vcs_revision":
+          "'${CIRCLE_SHA1}'", "branch": "'${CIRCLE_BRANCH}'", "reponame":
+          "'${CIRCLE_PROJECT_REPONAME}'", "username":
+          "'${CIRCLE_PROJECT_USERNAME}'"}}'
+          "https://webhook.atomist.com/atomist/circle"
+    - checkout
+    - restore_cache:
           keys:
-            - 'v1-dependencies-{{ checksum "pom.xml" }}'
-            - v1-dependencies-
-      - run: 'mvn dependency:go-offline'
-      - save_cache:
+          - 'v1-dependencies-{{ checksum "pom.xml" }}'
+          - v1-dependencies-
+    - run: 'mvn dependency:go-offline'
+    - save_cache:
           paths:
-            - ~/.m2
+          - ~/.m2
           key: 'v1-dependencies-{{ checksum "pom.xml" }}'
-      - run: mvn integration-test
+    - run: mvn integration-test
 notify:
   webhooks:
-  - url: 'https://webhook.atomist.com/circle'
+  - url: 'https://webhook.atomist.com/atomist/circle'

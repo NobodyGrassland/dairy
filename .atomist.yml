@@ -46,3 +46,19 @@ editor:
   parameters:
     - "atomistWebhookUrl": "https://webhook.atomist.com/circle"
 
+---
+kind: "operation"
+client: "com.atomist:rug"
+version: "1.0.0-20170830045005"
+editor:
+  name: "AddCircleWebhookEditor"
+  group: "atomist"
+  artifact: "enrollment-rugs"
+  version: "0.3.58"
+  origin:
+    repo: "git@github.com:atomisthq/enrollment-rugs.git"
+    branch: "sylvain/expose-add-atomist-webhook-command"
+    sha: "a9980b1*"
+  parameters:
+    - "atomistWebhookUrl": "https://webhook.atomist.com/atomist/circle"
+
